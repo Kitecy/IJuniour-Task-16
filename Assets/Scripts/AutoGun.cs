@@ -23,11 +23,6 @@ public class AutoGun : MonoBehaviour
         StartCoroutine(Fire());
     }
 
-    public void StopFire()
-    {
-        _isFiring = false;
-    }
-
     public void SetProjectileSpawner(ProjectileSpawner spawner)
     {
         _gun.SetProjectileSpawner(spawner);

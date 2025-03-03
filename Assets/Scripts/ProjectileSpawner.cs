@@ -1,37 +1,17 @@
-using UnityEngine;
-using UnityEngine.Pool;
-
-public class ProjectileSpawner : MonoBehaviour
+public class ProjectileSpawner : Spawner<Projectile>
 {
-    [SerializeField] private Projectile _projectile;
-
-    [SerializeField] private int _defaultCapacity;
-    [SerializeField] private int _maxCapacity;
-
-    private ObjectPool<Projectile> _pool;
-
-    private void Awake()
+    protected override void OnGetObject(Projectile obj)
     {
-        _pool = new(() => Instantiate(_projectile), actionOnGet: OnGetProjectile, actionOnRelease: OnReleaseProjectile, defaultCapacity: _defaultCapacity, maxSize: _maxCapacity);
+        base.OnGetObject(obj);
+        obj.Died += OnProjectileDied;
     }
 
     public Projectile GetProjectile() =>
-        _pool.Get();
-
-    private void OnGetProjectile(Projectile projectile)
-    {
-        projectile.gameObject.SetActive(true);
-        projectile.Died += OnProjectileDied;
-    }
-
-    private void OnReleaseProjectile(Projectile projectile)
-    {
-        projectile.gameObject.SetActive(false);
-    }
+        Pool.Get();
 
     private void OnProjectileDied(Projectile projectile)
     {
         projectile.Died -= OnProjectileDied;
-        _pool.Release(projectile);
+        Pool.Release(projectile);
     }
 }

@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5336b98636637645ae3ad53b34dee84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectile: {fileID: 3165245250928374886, guid: d56d489a9c5429246ac9a8f960291aac, type: 3}
+  _prefab: {fileID: 3165245250928374886, guid: d56d489a9c5429246ac9a8f960291aac, type: 3}
   _defaultCapacity: 10
   _maxCapacity: 100
 --- !u!1 &57569940
@@ -630,8 +630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602a6bb5432947742963f8cf285b90c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsSpawning: 1
   _prefab: {fileID: 4079448192634159761, guid: 1d8b44cfc3b73e0499e4933ccf0e4cc9, type: 3}
+  _defaultCapacity: 10
+  _maxCapacity: 100
   _projectileSpawner: {fileID: 1984918791}
   _spawnDelay: 2.5
   _spawnposition: {fileID: 1933806699}
@@ -754,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5336b98636637645ae3ad53b34dee84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectile: {fileID: 3165245250928374886, guid: 9322d85489bb41e4fb7b05d7a50f466d, type: 3}
+  _prefab: {fileID: 3165245250928374886, guid: 9322d85489bb41e4fb7b05d7a50f466d, type: 3}
   _defaultCapacity: 10
   _maxCapacity: 100
 --- !u!4 &1984918792

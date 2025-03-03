@@ -1,11 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : Spawner<Enemy>
 {
-    public bool IsSpawning;
-
-    [SerializeField] private Enemy _prefab;
     [SerializeField] private ProjectileSpawner _projectileSpawner;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private Transform _spawnposition;
@@ -13,22 +10,32 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _maxY;
 
     private WaitForSeconds _delay;
+    private bool _isSpawning = true;
 
     private void Awake()
     {
+        base.Awake();
+
         _delay = new(_spawnDelay);
 
-        if (IsSpawning)
+        if (_isSpawning)
             StartCoroutine(SpawnDelay());
+    }
+
+    protected override void OnGetObject(Enemy obj)
+    {
+        base.OnGetObject(obj);
+        obj.ReturnedToPool += OnEnemyDied;
     }
 
     private void Spawn()
     {
         float y = Random.Range(_minY, _maxY);
-        Enemy enemy = Instantiate(_prefab, new Vector3(_spawnposition.position.x, y, 0), Quaternion.identity);
+        Enemy enemy = Pool.Get();
+        enemy.transform.position = new Vector3(_spawnposition.position.x, y, 0);
         enemy.SetProjectileSpawner(_projectileSpawner);
 
-        if (IsSpawning)
+        if (_isSpawning)
             StartCoroutine(SpawnDelay());
     }
 
@@ -36,5 +43,11 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return _delay;
         Spawn();
+    }
+
+    private void OnEnemyDied(Enemy enemy)
+    {
+        enemy.ReturnedToPool -= OnEnemyDied;
+        Pool.Release(enemy);
     }
 }

@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
     {
         Projectile projectile = _projectileSpawner.GetProjectile();
         projectile.transform.position = _firePoint.position;
+        projectile.transform.rotation = transform.rotation;
         projectile.ClearTrail();
 
         Fired?.Invoke();

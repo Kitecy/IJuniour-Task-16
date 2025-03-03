@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class Enemy : Dieable
     [SerializeField] private float _lifeTime;
 
     private WaitForSeconds _delay;
+
+    public event Action<Enemy> ReturnedToPool;
 
     private void Awake()
     {
@@ -28,7 +31,7 @@ public class Enemy : Dieable
     public override void Die()
     {
         base.Die();
-        Destroy(gameObject);
+        ReturnedToPool?.Invoke(this);
     }
 
     public void SetProjectileSpawner(ProjectileSpawner spawner)
@@ -39,6 +42,5 @@ public class Enemy : Dieable
     private IEnumerator WaitDeath()
     {
         yield return _delay;
-        Destroy(gameObject);
     }
 }
