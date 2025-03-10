@@ -18,8 +18,12 @@ public class Enemy : Dieable
 
     private void Start()
     {
-        _autoGun.StartFire();
         StartCoroutine(WaitDeath());
+    }
+
+    public void StartFire()
+    {
+        _autoGun.StartFire();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

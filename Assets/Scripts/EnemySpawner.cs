@@ -35,6 +35,7 @@ public class EnemySpawner : Spawner<Enemy>
         Enemy enemy = Pool.Get();
         enemy.transform.position = new Vector3(_spawnposition.position.x, y, 0);
         enemy.SetProjectileSpawner(_projectileSpawner);
+        enemy.StartFire();
 
         if (_isSpawning)
             StartCoroutine(SpawnDelay());
