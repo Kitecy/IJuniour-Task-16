@@ -24,13 +24,9 @@ public class Rotator : MonoBehaviour
         float angle;
 
         if (_rigidbody2D.linearVelocityY > 0)
-        {
-            angle = Mathf.LerpAngle(transform.eulerAngles.z, _max, _speed * Time.deltaTime);
-        }
+            angle = _max;
         else
-        {
             angle = Mathf.LerpAngle(transform.eulerAngles.z, _min, _speed * Time.deltaTime);
-        }
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }

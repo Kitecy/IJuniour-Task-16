@@ -1,22 +1,22 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DeathChecker : MonoBehaviour
 {
     [SerializeField] private Dieable _player;
+    [SerializeField] private DeathPage _deathPage;
 
     private void OnEnable()
     {
-        _player.Died += RestartLevel;
+        _player.Died += ActivateDeathPage;
     }
 
     private void OnDisable()
     {
-        _player.Died -= RestartLevel;
+        _player.Died -= ActivateDeathPage;
     }
 
-    private void RestartLevel()
+    private void ActivateDeathPage()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _deathPage.Activate();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using @Random = UnityEngine.Random;
 
 public class EnemySpawner : Spawner<Enemy>
 {
@@ -12,7 +13,7 @@ public class EnemySpawner : Spawner<Enemy>
     private WaitForSeconds _delay;
     private bool _isSpawning = true;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 

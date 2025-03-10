@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _lifeTime;
 
     private TrailRenderer _trailRenderer;
+    private Score _score;
 
     private Coroutine _coroutine;
     private WaitForSeconds _delay;
@@ -23,7 +24,7 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
-        _coroutine = StartCoroutine(DeathWait());
+        _coroutine = StartCoroutine(WaitDeath());
     }
 
     private void OnDisable()
@@ -36,8 +37,22 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Dieable dieable))
         {
             dieable.Die();
-            Died?.Invoke(this);
+
+            if (dieable is Enemy)
+                _score.AddValue();
+
+            Kill();
         }
+    }
+
+    public void SetScore(Score score)
+    {
+        _score = score;
+    }
+
+    public void Kill()
+    {
+        Died?.Invoke(this);
     }
 
     public void ClearTrail()
@@ -45,9 +60,9 @@ public class Projectile : MonoBehaviour
         _trailRenderer.Clear();
     }
 
-    private IEnumerator DeathWait()
+    private IEnumerator WaitDeath()
     {
         yield return _delay;
-        Died?.Invoke(this);
+        Kill();
     }
 }
