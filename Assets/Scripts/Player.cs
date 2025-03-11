@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : Dieable
+public class Player : Mortality
 {
     [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private Jumper _jumper;

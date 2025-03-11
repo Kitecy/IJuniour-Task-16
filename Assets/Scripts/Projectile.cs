@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(TrailRenderer))]
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPoolableObject
 {
     [SerializeField] private float _lifeTime;
 
@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     private Coroutine _coroutine;
     private WaitForSeconds _delay;
 
-    public event Action<Projectile> Died;
+    public event Action<IPoolableObject> ReleasedToPool;
 
     private void Awake()
     {
@@ -32,27 +32,27 @@ public class Projectile : MonoBehaviour
         StopCoroutine(_coroutine);
     }
 
+    public void ReturnToPool()
+    {
+        ReleasedToPool?.Invoke(this);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Dieable dieable))
+        if (collision.gameObject.TryGetComponent(out Mortality dieable))
         {
             dieable.Die();
 
             if (dieable is Enemy)
                 _score.AddValue();
 
-            Kill();
+            ReturnToPool();
         }
     }
 
     public void SetScore(Score score)
     {
         _score = score;
-    }
-
-    public void Kill()
-    {
-        Died?.Invoke(this);
     }
 
     public void ClearTrail()
@@ -63,6 +63,6 @@ public class Projectile : MonoBehaviour
     private IEnumerator WaitDeath()
     {
         yield return _delay;
-        Kill();
+        ReturnToPool();
     }
 }

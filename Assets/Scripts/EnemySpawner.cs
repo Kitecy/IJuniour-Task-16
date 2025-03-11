@@ -26,7 +26,7 @@ public class EnemySpawner : Spawner<Enemy>
     protected override void OnGetObject(Enemy obj)
     {
         base.OnGetObject(obj);
-        obj.ReturnedToPool += OnEnemyDied;
+        obj.ReleasedToPool += OnEnemyDied;
     }
 
     private void Spawn()
@@ -47,9 +47,9 @@ public class EnemySpawner : Spawner<Enemy>
         Spawn();
     }
 
-    private void OnEnemyDied(Enemy enemy)
+    private void OnEnemyDied(IPoolableObject enemy)
     {
-        enemy.ReturnedToPool -= OnEnemyDied;
-        Pool.Release(enemy);
+        enemy.ReleasedToPool -= OnEnemyDied;
+        Pool.Release(enemy as Enemy);
     }
 }

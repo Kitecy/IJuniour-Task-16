@@ -7,7 +7,7 @@ public class ProjectileSpawner : Spawner<Projectile>
     protected override void OnGetObject(Projectile obj)
     {
         base.OnGetObject(obj);
-        obj.Died += OnProjectileDied;
+        obj.ReleasedToPool += OnProjectileDied;
     }
 
     protected override Projectile Create()
@@ -20,9 +20,9 @@ public class ProjectileSpawner : Spawner<Projectile>
     public Projectile GetProjectile() =>
         Pool.Get();
 
-    private void OnProjectileDied(Projectile projectile)
+    private void OnProjectileDied(IPoolableObject projectile)
     {
-        projectile.Died -= OnProjectileDied;
-        Pool.Release(projectile);
+        projectile.ReleasedToPool -= OnProjectileDied;
+        Pool.Release(projectile as Projectile);
     }
 }

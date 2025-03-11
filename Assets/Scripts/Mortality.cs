@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Dieable : MonoBehaviour
+public class Mortality : MonoBehaviour
 {
     public event Action Died;
 

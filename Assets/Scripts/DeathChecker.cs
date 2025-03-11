@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DeathChecker : MonoBehaviour
 {
-    [SerializeField] private Dieable _player;
+    [SerializeField] private Mortality _player;
     [SerializeField] private DeathPage _deathPage;
 
     private void OnEnable()
