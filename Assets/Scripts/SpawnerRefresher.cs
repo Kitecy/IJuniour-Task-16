@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerRefresher<T> : MonoBehaviour where T : MonoBehaviour
+public class SpawnerRefresher<T> : MonoBehaviour where T : MonoBehaviour, IPoolableObject
 {
     [SerializeField] private Spawner<T> _spawner;
     [SerializeField] private DeathPage _deathPage;
@@ -32,9 +32,9 @@ public class SpawnerRefresher<T> : MonoBehaviour where T : MonoBehaviour
         Active.Remove(obj);
     }
 
-    public virtual void Refresh()
+    public void Refresh()
     {
         for (int i = Active.Count - 1; i > 0; i--)
-            _spawner.ReleaseObject(Active[i]);
+            Active[i].ReturnToPool();
     }
 }

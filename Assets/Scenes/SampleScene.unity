@@ -638,19 +638,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 417431056}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1723367945}
-        m_TargetAssemblyTypeName: StartPage, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &521095411
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,19 +895,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 617906752}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1502758086}
-        m_TargetAssemblyTypeName: DeathPage, Assembly-CSharp
-        m_MethodName: Restart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1236309933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 958834819368056325, guid: 22db1c6fc93b7f240becdc70b3912107, type: 3}
@@ -1168,6 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5018325ece80f684687d18b5475c565f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _restartButton: {fileID: 617906754}
 --- !u!1 &1511158269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2444b528a929e8a4f80d2e04a7bd1a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playButton: {fileID: 417431058}
 --- !u!1 &1933806698
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class EnemySpawner : Spawner<Enemy>
     private void Spawn()
     {
         float y = Random.Range(_minY, _maxY);
-        Enemy enemy = Pool.Get();
+        Enemy enemy = GetObject();
         enemy.transform.position = new Vector3(_spawnposition.position.x, y, 0);
         enemy.SetProjectileSpawner(_projectileSpawner);
         enemy.StartFire();
@@ -50,6 +50,6 @@ public class EnemySpawner : Spawner<Enemy>
     private void OnEnemyDied(IPoolableObject enemy)
     {
         enemy.ReleasedToPool -= OnEnemyDied;
-        Pool.Release(enemy as Enemy);
+        ReleaseObject(enemy as Enemy);
     }
 }

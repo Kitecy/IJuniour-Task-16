@@ -27,16 +27,6 @@ public class Projectile : MonoBehaviour, IPoolableObject
         _coroutine = StartCoroutine(WaitDeath());
     }
 
-    private void OnDisable()
-    {
-        StopCoroutine(_coroutine);
-    }
-
-    public void ReturnToPool()
-    {
-        ReleasedToPool?.Invoke(this);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Mortality dieable))
@@ -48,6 +38,11 @@ public class Projectile : MonoBehaviour, IPoolableObject
 
             ReturnToPool();
         }
+    }
+
+    public void ReturnToPool()
+    {
+        ReleasedToPool?.Invoke(this);
     }
 
     public void SetScore(Score score)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DeathChecker : MonoBehaviour
+public class DeathHandler : MonoBehaviour
 {
     [SerializeField] private Mortality _player;
     [SerializeField] private DeathPage _deathPage;

@@ -35,7 +35,7 @@ public class Enemy : Mortality, IPoolableObject
     public override void Die()
     {
         base.Die();
-        ReleasedToPool?.Invoke(this);
+        ReturnToPool();
     }
 
     public void SetProjectileSpawner(ProjectileSpawner spawner)
@@ -46,10 +46,11 @@ public class Enemy : Mortality, IPoolableObject
     private IEnumerator WaitDeath()
     {
         yield return _delay;
+        ReturnToPool();
     }
 
     public void ReturnToPool()
     {
-        throw new NotImplementedException();
+        ReleasedToPool?.Invoke(this);
     }
 }

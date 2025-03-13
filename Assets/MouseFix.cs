@@ -1,8 +1,5 @@
 #if UNITY_EDITOR
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /*
  * Комментарий для ментора:
@@ -17,11 +14,11 @@ public static class MouseFix
     [RuntimeInitializeOnLoadMethod]
     private static void ActivateMouse()
     {
-        List<InputDevice> devices = InputSystem.devices.ToList();
-        List<InputDevice> mouseDevices = devices.FindAll(x => x.displayName == s_mouseName);
+        //List<InputDevice> devices = InputSystem.devices.ToList();
+        //List<InputDevice> mouseDevices = devices.FindAll(x => x.displayName == s_mouseName);
 
-        foreach (InputDevice mouse in mouseDevices)
-            InputSystem.EnableDevice(mouse);
+        //foreach (InputDevice mouse in mouseDevices)
+        //    InputSystem.EnableDevice(mouse);
     }
 }
 #endif

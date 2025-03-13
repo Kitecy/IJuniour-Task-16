@@ -9,21 +9,21 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] private int _defaultCapacity;
     [SerializeField] private int _maxCapacity;
 
-    protected ObjectPool<T> Pool;
+    private ObjectPool<T> _pool;
 
     public event Action<T> Taken;
     public event Action<T> Released;
 
     protected virtual void Awake()
     {
-        Pool = new(Create, actionOnGet: OnGetObject, actionOnRelease: OnReleaseObject, defaultCapacity: _defaultCapacity, maxSize: _maxCapacity);
+        _pool = new(Create, actionOnGet: OnGetObject, actionOnRelease: OnReleaseObject, defaultCapacity: _defaultCapacity, maxSize: _maxCapacity);
     }
 
     public T GetObject() =>
-        Pool.Get();
+        _pool.Get();
 
     public void ReleaseObject(T obj) =>
-        Pool.Release(obj);
+        _pool.Release(obj);
 
     protected virtual void OnGetObject(T obj)
     {
@@ -31,7 +31,7 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
         Taken?.Invoke(obj);
     }
 
-    protected virtual void OnReleaseObject(T obj)
+    private void OnReleaseObject(T obj)
     {
         obj.gameObject.SetActive(false);
         Released?.Invoke(obj);
