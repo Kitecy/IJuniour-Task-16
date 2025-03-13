@@ -34,7 +34,7 @@ public class SpawnerRefresher<T> : MonoBehaviour where T : MonoBehaviour, IPoola
 
     public void Refresh()
     {
-        for (int i = Active.Count - 1; i > 0; i--)
+        for (int i = Active.Count - 1; i >= 0; i--)
             Active[i].ReturnToPool();
     }
 }
